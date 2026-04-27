@@ -21,12 +21,12 @@ def infixToPostfix(s):
     while i < len(s):
         c = s[i]
 
-        # Skip spaces
+        # Skip spasi
         if c == ' ':
             i += 1
             continue
 
-        # If digit, accumulate full number
+        # jika digit, jumlahkan semua angka
         if c.isdigit():
             num = ''
             while i < len(s) and s[i].isdigit():
@@ -35,21 +35,21 @@ def infixToPostfix(s):
             res.append(num)
             continue
 
-        # If letter (variable), add to result
+        # jika huruf (variable), tambahkan ke hasil
         elif c.isalpha():
             res.append(c)
 
-        # If '(', push to stack
+        # jika '(', push to stack
         elif c == '(':
             st.append('(')
 
-        # If ')', pop until '('
+        # jika ')', pop until '('
         elif c == ')':
             while st and st[-1] != '(':
                 res.append(st.pop())
             st.pop()
 
-        # If operator
+        # jika operator
         else:
             while st and st[-1] != '(' and \
                 (prec(st[-1]) > prec(c) or (prec(st[-1]) == prec(c) \
@@ -59,7 +59,7 @@ def infixToPostfix(s):
 
         i += 1
 
-    # Pop remaining operators
+    # Pop operator tersisa
     while st:
         res.append(st.pop())
 
@@ -70,12 +70,12 @@ def evaluatePostfix(arr):
 
     for token in arr:
         
-        # If it's an operand (number), push it onto the stack
+        # jika dia operand (number), push it onto the stack
         if token[0].isdigit() or (len(token) > 1 and token[0] == '-'):
             st.append(int(token))
             print(f"Push: {token} -> Stack: {st}")
         
-        # Otherwise, it must be an operator
+        # kalo tidak, pasti operator
         else:
             val1 = st.pop()
             val2 = st.pop()

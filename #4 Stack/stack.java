@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class stack {
-    // Function to return precedence of operators
+    // Fungsi operator
     static int prec(char c) {
         if (c == '^')
             return 3;
@@ -16,7 +16,7 @@ public class stack {
             return -1;
     }
 
-    // Function to check if operator is right-associative
+    // Fungsi cek op itu right-associative
     static boolean isRightAssociative(char c) {
         return c == '^';
     }
@@ -29,13 +29,13 @@ public class stack {
         while (i < s.length()) {
             char c = s.charAt(i);
 
-            // Skip spaces
+            // Skip spasi
             if (c == ' ') {
                 i++;
                 continue;
             }
 
-            // If digit, accumulate full number
+            // jika digit, jumlahkan seluruh angka
             if (Character.isDigit(c)) {
                 StringBuilder num = new StringBuilder();
                 while (i < s.length() && Character.isDigit(s.charAt(i))) {
@@ -46,17 +46,17 @@ public class stack {
                 continue;
             }
 
-            // If letter (variable), add to result
+            // jika huruf (variable), tambahkan ke result
             else if (Character.isLetter(c)) {
                 res.add(String.valueOf(c));
             }
 
-            // If '(', push to stack
+            // jika '(', push to stack
             else if (c == '(') {
                 st.push('(');
             }
 
-            // If ')', pop until '('
+            // jika ')', pop sampai '('
             else if (c == ')') {
                 while (!st.isEmpty() && st.peek() != '(') {
                     res.add(String.valueOf(st.pop()));
@@ -64,7 +64,7 @@ public class stack {
                 st.pop();
             }
 
-            // If operator
+            // jika operator
             else {
                 while (!st.isEmpty() && st.peek() != '(' &&
                        (prec(st.peek()) > prec(c) ||
@@ -77,7 +77,7 @@ public class stack {
             i++;
         }
 
-        // Pop remaining operators
+        // Pop operator tersisa
         while (!st.isEmpty()) {
             res.add(String.valueOf(st.pop()));
         }
@@ -96,14 +96,14 @@ public class stack {
 
         for (String token : arr) {
           
-            // If it's an operand (number), push it onto the stack
+            // jika dia operand (number), masukkan ke stack
             if (Character.isDigit(token.charAt(0)) || 
                 (token.length() > 1 && token.charAt(0) == '-')) {
                 st.push(Integer.parseInt(token));
                 System.out.println("Push: " + token + " -> Stack: " + st);
             } 
         
-            // Otherwise, it must be an operator
+            // kalo tidak, harusnya operator
             else {
                 int val1 = st.pop();
                 int val2 = st.pop();

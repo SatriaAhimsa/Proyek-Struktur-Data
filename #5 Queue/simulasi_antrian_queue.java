@@ -18,7 +18,7 @@ class Pasien {
     }
 }
 
-// 2. STRUKTUR DATA QUEUE MANUAL (TANPA LIBRARY)
+// 2. STRUKTUR DATA QUEUE
 class CustomQueueRS {
     Pasien front, rear;
 
